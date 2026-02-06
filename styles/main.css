@@ -1,0 +1,150 @@
+@font-face {
+    font-family: "Google Sans";
+    src: url(../assets/fonts/GoogleSans.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Cocogoose";
+    src: url(../assets/fonts/Cocogoose.ttf) format("truetype");
+}
+
+body {
+    background-color: #EFD09E;
+    font-family: "Google Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.general-info {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    background-color: #362110;
+    border-radius: 0 0 40px 40px;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.header h1 {
+    color: #EFD09E;
+    margin: 0;
+    font-size: 36pt;
+    font-family: "Cocogoose", sans-serif;
+}
+
+.profile-section {
+    margin-top: 0pt;
+    text-align: center;
+}
+
+.profile-image {
+    margin-top: 0pt;
+    width: 20em;
+}
+
+.profile-description {
+    font-size: 20pt;
+    margin-right: 20pt;
+    margin-left: 20pt;
+}
+
+.profile-description a {
+    text-decoration: none;
+    color: #915a14;
+    font-size: 2em;
+}
+
+.info-section {
+    display: flex;
+    align-items: center;
+    margin-top: 0pt;
+}
+
+.social-links {
+    font-size: 16pt;
+    list-style-type: none;
+    background-color: #bb9457;
+    border-radius: 20px;
+    padding: 30px;
+    min-height: 10em;
+    height: 10em;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: #362110;
+    font-weight: 500;
+}
+
+.social-links img {
+    width: 20pt;
+}
+
+.social-links hr {
+    background-color: #8a6f42;
+    border: none;
+    height: 3px;
+    border-radius: 30px;
+}
+
+.features-list {
+    font-size: 16pt;
+    margin-left: 20pt;
+    background-color: #bb9457;
+    border-radius: 20px;
+    padding: 30px;
+    padding-left: 50px;
+    height: 10em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #362110;
+}
+
+.main-content {
+    background-color: #362110;
+    border-radius: 40px 40px 0px 0px;
+    padding: 20px;
+    color: #BB9457;
+}
+
+.work-title {
+    text-align: center;
+    font-size: 36pt;
+    font-weight: 900;
+}
+
+.projects-container {
+    text-align: center;
+}
+
+.projects-container a {
+    text-decoration: none;
+}
+
+.project-image {
+    width: 100pt;
+    margin: 10pt;
+    border-radius: 20px;
+}
+
+.content-section {
+    padding: 20px;
+}
+
+.content-card {
+    margin-bottom: 20px;
+    background-color: #4E3624;
+    border-radius: 20px;
+    padding: 30px;
+}
+.content-card h2 {
+    font-size: 24pt;
+    margin-top: 0;
+    color: #f7b175;
+}

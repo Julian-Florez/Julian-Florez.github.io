@@ -71,8 +71,7 @@ body {
     background-color: #bb9457;
     border-radius: 20px;
     padding: 30px;
-    min-height: 10em;
-    height: 10em;
+    height: auto;
 }
 
 .social-links a {
@@ -99,7 +98,7 @@ body {
     border-radius: 20px;
     padding: 30px;
     padding-left: 50px;
-    height: 10em;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -17,10 +17,7 @@ body {
 
 .general-info {
     margin: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    box-sizing: content-box;
 }
 
 .header {
@@ -60,8 +57,6 @@ body {
 }
 
 .info-section {
-    display: flex;
-    align-items: center;
     margin-top: 0pt;
 }
 
@@ -71,7 +66,9 @@ body {
     background-color: #bb9457;
     border-radius: 20px;
     padding: 30px;
-    height: auto;
+    height: 300px;
+    width: 35%;
+    float: right;
 }
 
 .social-links a {
@@ -93,22 +90,24 @@ body {
 
 .features-list {
     font-size: 16pt;
-    margin-left: 20pt;
     background-color: #bb9457;
     border-radius: 20px;
     padding: 30px;
     padding-left: 50px;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    height: 300px;
     color: #362110;
+    width: 35%;
+    float: left;
+}
+.clear {
+    clear: both;
 }
 
 .main-content {
     background-color: #362110;
     border-radius: 40px 40px 0px 0px;
     padding: 20px;
+    height: 150vh;
     color: #BB9457;
 }
 
@@ -134,14 +133,21 @@ body {
 
 .content-section {
     padding: 20px;
+    box-sizing: border-box;
 }
 
+
 .content-card {
-    margin-bottom: 20px;
+    float: left;
+    width: calc(50% - 20px);
+    margin: 10px;
     background-color: #4E3624;
     border-radius: 20px;
+    box-sizing: border-box;
     padding: 30px;
+    height: 300px;
 }
+
 .content-card h2 {
     font-size: 24pt;
     margin-top: 0;

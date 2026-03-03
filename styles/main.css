@@ -17,8 +17,8 @@ body {
 
 .general-info {
     margin: 20px;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     align-items: center;
     justify-content: center;
 }
@@ -60,7 +60,8 @@ body {
 }
 
 .info-section {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     margin-top: 0pt;
 }
@@ -99,8 +100,9 @@ body {
     padding: 30px;
     padding-left: 50px;
     height: auto;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
     justify-content: center;
     color: #362110;
 }
@@ -119,6 +121,8 @@ body {
 }
 
 .projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     text-align: center;
 }
 
@@ -133,6 +137,9 @@ body {
 }
 
 .content-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
     padding: 20px;
 }
 

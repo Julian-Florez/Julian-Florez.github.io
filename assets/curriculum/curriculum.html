@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Curriculum | Julián Santiago Flórez Castañeda</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--paper: #f8f7f3;
+			--canvas: #e9e9e7;
+			--ink: #2b2621;
+			--muted: #6d645b;
+			--accent: #a86f2d;
+			--accent-soft: #c89a61;
+			--line: #d3b189;
+			--chip: #f1ece3;
+			--print-scale: 1;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			background: radial-gradient(circle at top, #f2f2f1 0%, var(--canvas) 58%, #dfdfdc 100%);
+			color: var(--ink);
+			font-family: "Titillium Web", "Segoe UI", sans-serif;
+			padding: 72px 56px;
+		}
+
+		a {
+			color: inherit;
+		}
+
+		.page {
+			width: min(1120px, calc(100vw - 112px));
+			min-width: 920px;
+			margin: 0 auto;
+			background: var(--paper);
+			padding: 74px 82px 58px;
+			box-shadow: 0 24px 60px rgba(43, 38, 33, 0.14);
+		}
+
+		.hero {
+			text-align: center;
+		}
+
+		.hero h1 {
+			margin: 0;
+			color: var(--accent);
+			font-size: clamp(2.45rem, 4.8vw, 3.2rem);
+			font-weight: 700;
+			letter-spacing: 0.02em;
+		}
+
+		.hero p {
+			margin: 8px 0 0;
+			color: var(--muted);
+			font-size: 1.18rem;
+			letter-spacing: 0.18em;
+			text-transform: uppercase;
+		}
+
+		.contact-row {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			grid-auto-flow: column;
+			gap: 28px;
+			margin: 34px 0 26px;
+		}
+
+		.contact-item {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 14px;
+			min-height: 58px;
+		}
+
+		.contact-icon {
+			width: 24px;
+			height: 24px;
+			color: var(--accent);
+			flex: 0 0 auto;
+		}
+
+		.contact-copy {
+			text-align: left;
+		}
+
+		.contact-label {
+			font-size: 0.84rem;
+			font-weight: 700;
+			letter-spacing: 0.13em;
+			text-transform: uppercase;
+			color: var(--ink);
+		}
+
+		.contact-value {
+			margin-top: 2px;
+			font-size: 1.04rem;
+			color: var(--muted);
+		}
+
+		.summary {
+			max-width: 840px;
+			margin: 0 auto;
+			font-size: 1.15rem;
+			line-height: 1.52;
+			text-align: justify;
+		}
+
+		.portfolio {
+			margin: 30px auto 32px;
+			display: grid;
+			justify-items: center;
+			gap: 10px;
+		}
+
+		.portfolio a {
+			text-decoration: none;
+		}
+
+		.qr-frame {
+			width: 112px;
+			height: 112px;
+			display: grid;
+			place-items: center;
+			border-radius: 16px;
+			background: transparent;
+			padding: 10px;
+			box-shadow: none;
+		}
+
+		.qr-frame svg {
+			width: 100%;
+			height: 100%;
+			display: block;
+		}
+
+		.portfolio-label {
+			color: var(--accent-soft);
+			font-size: 0.92rem;
+			font-weight: 700;
+			letter-spacing: 0.16em;
+			text-transform: uppercase;
+		}
+
+		.content-grid {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) minmax(0, 1.06fr);
+			gap: 34px;
+			align-items: start;
+		}
+
+		.section {
+			margin-bottom: 24px;
+		}
+
+		.right-column .section {
+			margin-bottom: 38px;
+		}
+
+		.right-column .section:last-child {
+			margin-bottom: 0;
+		}
+
+		.section-title {
+			display: flex;
+			align-items: baseline;
+			gap: 6px;
+			margin: 0 0 16px;
+			padding-bottom: 8px;
+			border-bottom: 1px solid var(--line);
+			color: var(--accent);
+			font-size: 1.08rem;
+			font-weight: 700;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+		}
+
+		.section-title span {
+			color: var(--muted);
+			font-size: 0.96rem;
+			font-weight: 500;
+			letter-spacing: 0.04em;
+		}
+
+		.timeline,
+		.feature-list,
+		.references,
+		.languages,
+		.soft-skills {
+			display: grid;
+			gap: 14px;
+		}
+
+		.timeline-item,
+		.feature-item,
+		.reference-item,
+		.language-item,
+		.soft-skill {
+			position: relative;
+			padding-left: 18px;
+		}
+
+		.timeline-item::before,
+		.feature-item::before,
+		.reference-item::before,
+		.language-item::before,
+		.soft-skill::before {
+			content: "›";
+			position: absolute;
+			left: 0;
+			top: 0;
+			color: var(--accent);
+			font-size: 1.25rem;
+			line-height: 1;
+			font-weight: 700;
+		}
+
+		.item-title {
+			font-size: 1.1rem;
+			font-weight: 700;
+			text-transform: uppercase;
+			color: var(--ink);
+		}
+
+		.item-subtitle,
+		.item-date,
+		.item-description,
+		.language-detail,
+		.reference-detail {
+			color: var(--muted);
+			font-size: 1.04rem;
+		}
+
+		.item-description {
+			margin-top: 2px;
+			line-height: 1.44;
+		}
+
+		.skills-stack {
+			display: grid;
+			gap: 14px;
+		}
+
+		.skill-card {
+			position: relative;
+			padding-left: 18px;
+		}
+
+		.skill-card::before {
+			content: ">";
+			position: absolute;
+			left: 0;
+			top: 0;
+			color: var(--accent);
+			font-size: 1.25rem;
+			line-height: 1;
+			font-weight: 700;
+		}
+
+		.skill-card .item-title {
+			font-size: 1.08rem;
+			text-transform: none;
+		}
+
+		.interests .feature-item,
+		.skill-card .item-description {
+			text-align: left;
+		}
+
+		.soft-skills-grid,
+		.languages-grid,
+		.references-grid {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 12px 18px;
+		}
+
+		.soft-skill {
+			font-size: 1.05rem;
+			font-weight: 600;
+			color: var(--ink);
+		}
+
+		.language-item .item-title,
+		.reference-item .item-title {
+			text-transform: none;
+			font-size: 1.06rem;
+		}
+
+		@media (max-width: 900px) {
+			body {
+				overflow-x: auto;
+			}
+
+			.page {
+				padding: 48px 40px 36px;
+			}
+
+			.soft-skills-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.contact-item {
+				justify-content: center;
+			}
+
+			.summary {
+				text-align: left;
+			}
+		}
+
+		@page {
+			size: auto;
+			margin: 10mm;
+		}
+
+		@media print {
+			body {
+				padding: 0;
+				background: #ffffff;
+				overflow: hidden;
+			}
+
+			.page {
+				width: auto;
+				max-width: none;
+				min-width: 0;
+				margin: 0;
+				box-shadow: none;
+				padding: 0;
+				font-size: 10.6px;
+				zoom: var(--print-scale);
+			}
+
+			a {
+				text-decoration: none;
+			}
+
+			.hero h1 {
+				font-size: 22px;
+			}
+
+			.hero p {
+				font-size: 10px;
+				margin-top: 3px;
+			}
+
+			.contact-row {
+				gap: 10px;
+				margin: 12px 0 10px;
+			}
+
+			.contact-item {
+				min-height: 30px;
+				gap: 6px;
+			}
+
+			.contact-icon {
+				width: 18px;
+				height: 18px;
+			}
+
+			.contact-label {
+				font-size: 7.8px;
+			}
+
+			.contact-value,
+			.item-subtitle,
+			.item-date,
+			.item-description,
+			.language-detail,
+			.reference-detail {
+				font-size: 9.15px;
+			}
+
+			.summary {
+				max-width: none;
+				font-size: 9.35px;
+				line-height: 1.18;
+				text-align: justify;
+				text-justify: inter-word;
+				hyphens: auto;
+			}
+
+			.portfolio {
+				margin: 8px auto 10px;
+				gap: 4px;
+			}
+
+			.qr-frame {
+				width: 62px;
+				height: 62px;
+				padding: 5px;
+				border-radius: 9px;
+			}
+
+			.portfolio-label {
+				font-size: 7.8px;
+			}
+
+			.content-grid {
+				gap: 14px;
+			}
+
+			.section {
+				margin-bottom: 10px;
+			}
+
+			.right-column .section {
+				margin-bottom: 20px;
+			}
+
+			.right-column .section:last-child {
+				margin-bottom: 0;
+			}
+
+			.section-title {
+				margin-bottom: 7px;
+				padding-bottom: 3px;
+				font-size: 8.7px;
+			}
+
+			.section-title span {
+				font-size: 7.8px;
+			}
+
+			.timeline,
+			.feature-list,
+			.references,
+			.languages,
+			.soft-skills,
+			.skills-stack {
+				gap: 5px;
+			}
+
+			.timeline-item,
+			.feature-item,
+			.reference-item,
+			.language-item,
+			.soft-skill,
+			.skill-card {
+				padding-left: 10px;
+			}
+
+			.timeline-item::before,
+			.feature-item::before,
+			.reference-item::before,
+			.language-item::before,
+			.soft-skill::before,
+			.skill-card::before {
+				font-size: 9px;
+			}
+
+			.item-title,
+			.skill-card .item-title,
+			.language-item .item-title,
+			.reference-item .item-title,
+			.soft-skill {
+				font-size: 8.95px;
+			}
+
+			.item-description {
+				margin-top: 1px;
+				line-height: 1.12;
+				text-align: justify;
+				text-justify: inter-word;
+				hyphens: auto;
+			}
+
+			.soft-skills-grid,
+			.languages-grid,
+			.references-grid {
+				gap: 5px 10px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main class="page">
+		<header class="hero">
+			<h1>Julián Santiago Flórez Castañeda</h1>
+			<p>Estudiante de ingeniería de sistemas</p>
+		</header>
+
+		<section class="contact-row" aria-label="Información de contacto">
+			<article class="contact-item">
+				<svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+					<path fill="currentColor" d="M12 2a6.75 6.75 0 0 0-6.75 6.75c0 4.73 5.77 11.6 6.02 11.89a.95.95 0 0 0 1.46 0c.25-.29 6.02-7.16 6.02-11.89A6.75 6.75 0 0 0 12 2Zm0 9.35a2.6 2.6 0 1 1 0-5.2 2.6 2.6 0 0 1 0 5.2Z"/>
+				</svg>
+				<div class="contact-copy">
+					<div class="contact-label">Ubicación</div>
+					<div class="contact-value">Bogotá D.C, Colombia</div>
+				</div>
+			</article>
+
+			<article class="contact-item">
+				<svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+					<path fill="currentColor" d="M18.89 14.76c-1.09 0-2.15-.17-3.14-.49a.9.9 0 0 0-.89.21l-1.37 1.72a14.1 14.1 0 0 1-5.69-5.7l1.7-1.45a.92.92 0 0 0 .22-.93c-.33-1-.5-2.04-.5-3.14A.98.98 0 0 0 8.25 4H5.23c-.53 0-.98.43-.95.96.23 8.29 6.48 14.53 14.76 14.76.53.03.96-.42.96-.95v-3.03a.98.98 0 0 0-.97-.98Z"/>
+				</svg>
+				<div class="contact-copy">
+					<div class="contact-label">Celular</div>
+					<div class="contact-value">+57 310 7750438</div>
+				</div>
+			</article>
+
+			<article class="contact-item">
+				<svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+					<path fill="currentColor" d="M3.75 5.5h16.5A1.75 1.75 0 0 1 22 7.25v9.5a1.75 1.75 0 0 1-1.75 1.75H3.75A1.75 1.75 0 0 1 2 16.75v-9.5C2 6.28 2.78 5.5 3.75 5.5Zm0 1.5v.26L12 12.82l8.25-5.56V7H3.75Zm16.5 10c.14 0 .25-.11.25-.25V8.83l-7.95 5.36a.94.94 0 0 1-1.05 0L3.5 8.83v7.92c0 .14.11.25.25.25h16.5Z"/>
+				</svg>
+				<div class="contact-copy">
+					<div class="contact-label">E - mail</div>
+					<div class="contact-value">jflorez0820@gmail.com</div>
+				</div>
+			</article>
+		</section>
+
+		<section class="summary">
+			Estudiante de Ingeniería de Sistemas de la Universidad EAN con énfasis en desarrollo móvil y web, con dominio sólido en Kotlin (Jetpack Compose, Multiplatform), Java y Python; con experiencia como colaborador en proyectos de código abierto. Desarrollador multiplataforma experto en Sistemas de Diseño Frontend con conocimiento en Gestión de Infraestructura física. Alta capacidad de aprendizaje autodidacta, orientación al logro, pensamiento crítico, comunicación asertiva y trabajo en equipo multidisciplinario, enfocado en aportar soluciones innovadoras y escalables mediante el aprendizaje continuo de nuevas tecnologías.
+		</section>
+
+		<section class="portfolio" aria-label="Portafolio">
+			<a href="https://julian-florez.github.io/" target="_blank" rel="noreferrer noopener" aria-label="Abrir portafolio">
+				<div class="qr-frame">
+					<svg width="26.4mm" height="26.4mm" version="1.1" viewBox="0 0 26.4 26.4" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1.6,1.6H2.4V2.4H1.6zM2.4,1.6H3.2V2.4H2.4zM3.2,1.6H4V2.4H3.2zM4,1.6H4.8V2.4H4zM4.8,1.6H5.6V2.4H4.8zM5.6,1.6H6.4V2.4H5.6zM6.4,1.6H7.2V2.4H6.4zM8.8,1.6H9.6V2.4H8.8zM11.2,1.6H12V2.4H11.2zM12,1.6H12.8V2.4H12zM14.4,1.6H15.2V2.4H14.4zM16,1.6H16.8V2.4H16zM16.8,1.6H17.6V2.4H16.8zM19.2,1.6H20V2.4H19.2zM20,1.6H20.8V2.4H20zM20.8,1.6H21.6V2.4H20.8zM21.6,1.6H22.4V2.4H21.6zM22.4,1.6H23.2V2.4H22.4zM23.2,1.6H24V2.4H23.2zM24,1.6H24.8V2.4H24zM1.6,2.4H2.4V3.2H1.6zM6.4,2.4H7.2V3.2H6.4zM8,2.4H8.8V3.2H8zM10.4,2.4H11.2V3.2H10.4zM12.8,2.4H13.6V3.2H12.8zM13.6,2.4H14.4V3.2H13.6zM14.4,2.4H15.2V3.2H14.4zM16,2.4H16.8V3.2H16zM16.8,2.4H17.6V3.2H16.8zM19.2,2.4H20V3.2H19.2zM24,2.4H24.8V3.2H24zM1.6,3.2H2.4V4H1.6zM3.2,3.2H4V4H3.2zM4,3.2H4.8V4H4zM4.8,3.2H5.6V4H4.8zM6.4,3.2H7.2V4H6.4zM8.8,3.2H9.6V4H8.8zM12,3.2H12.8V4H12zM12.8,3.2H13.6V4H12.8zM14.4,3.2H15.2V4H14.4zM16.8,3.2H17.6V4H16.8zM19.2,3.2H20V4H19.2zM20.8,3.2H21.6V4H20.8zM21.6,3.2H22.4V4H21.6zM22.4,3.2H23.2V4H22.4zM24,3.2H24.8V4H24zM1.6,4H2.4V4.8H1.6zM3.2,4H4V4.8H3.2zM4,4H4.8V4.8H4zM4.8,4H5.6V4.8H4.8zM6.4,4H7.2V4.8H6.4zM8.8,4H9.6V4.8H8.8zM12,4H12.8V4.8H12zM12.8,4H13.6V4.8H12.8zM13.6,4H14.4V4.8H13.6zM16,4H16.8V4.8H16zM19.2,4H20V4.8H19.2zM20.8,4H21.6V4.8H20.8zM21.6,4H22.4V4.8H21.6zM22.4,4H23.2V4.8H22.4zM24,4H24.8V4.8H24zM1.6,4.8H2.4V5.6H1.6zM3.2,4.8H4V5.6H3.2zM4,4.8H4.8V5.6H4zM4.8,4.8H5.6V5.6H4.8zM6.4,4.8H7.2V5.6H6.4zM8,4.8H8.8V5.6H8zM8.8,4.8H9.6V5.6H8.8zM11.2,4.8H12V5.6H11.2zM12.8,4.8H13.6V5.6H12.8zM15.2,4.8H16V5.6H15.2zM16,4.8H16.8V5.6H16zM16.8,4.8H17.6V5.6H16.8zM17.6,4.8H18.4V5.6H17.6zM19.2,4.8H20V5.6H19.2zM20.8,4.8H21.6V5.6H20.8zM21.6,4.8H22.4V5.6H21.6zM22.4,4.8H23.2V5.6H22.4zM24,4.8H24.8V5.6H24zM1.6,5.6H2.4V6.4H1.6zM6.4,5.6H7.2V6.4H6.4zM9.6,5.6H10.4V6.4H9.6zM10.4,5.6H11.2V6.4H10.4zM11.2,5.6H12V6.4H11.2zM12,5.6H12.8V6.4H12zM15.2,5.6H16V6.4H15.2zM16.8,5.6H17.6V6.4H16.8zM19.2,5.6H20V6.4H19.2zM24,5.6H24.8V6.4H24zM1.6,6.4H2.4V7.2H1.6zM2.4,6.4H3.2V7.2H2.4zM3.2,6.4H4V7.2H3.2zM4,6.4H4.8V7.2H4zM4.8,6.4H5.6V7.2H4.8zM5.6,6.4H6.4V7.2H5.6zM6.4,6.4H7.2V7.2H6.4zM8,6.4H8.8V7.2H8zM9.6,6.4H10.4V7.2H9.6zM11.2,6.4H12V7.2H11.2zM12.8,6.4H13.6V7.2H12.8zM14.4,6.4H15.2V7.2H14.4zM16,6.4H16.8V7.2H16zM17.6,6.4H18.4V7.2H17.6zM19.2,6.4H20V7.2H19.2zM20,6.4H20.8V7.2H20zM20.8,6.4H21.6V7.2H20.8zM21.6,6.4H22.4V7.2H21.6zM22.4,6.4H23.2V7.2H22.4zM23.2,6.4H24V7.2H23.2zM24,6.4H24.8V7.2H24zM8.8,7.2H9.6V8H8.8zM9.6,7.2H10.4V8H9.6zM10.4,7.2H11.2V8H10.4zM11.2,7.2H12V8H11.2zM12,7.2H12.8V8H12zM12.8,7.2H13.6V8H12.8zM14.4,7.2H15.2V8H14.4zM15.2,7.2H16V8H15.2zM16,7.2H16.8V8H16zM1.6,8H2.4V8.8H1.6zM3.2,8H4V8.8H3.2zM4.8,8H5.6V8.8H4.8zM6.4,8H7.2V8.8H6.4zM8.8,8H9.6V8.8H8.8zM9.6,8H10.4V8.8H9.6zM10.4,8H11.2V8.8H10.4zM11.2,8H12V8.8H11.2zM12.8,8H13.6V8.8H12.8zM13.6,8H14.4V8.8H13.6zM15.2,8H16V8.8H15.2zM16.8,8H17.6V8.8H16.8zM20.8,8H21.6V8.8H20.8zM23.2,8H24V8.8H23.2zM1.6,8.8H2.4V9.6H1.6zM3.2,8.8H4V9.6H3.2zM4.8,8.8H5.6V9.6H4.8zM5.6,8.8H6.4V9.6H5.6zM8,8.8H8.8V9.6H8zM9.6,8.8H10.4V9.6H9.6zM11.2,8.8H12V9.6H11.2zM12.8,8.8H13.6V9.6H12.8zM13.6,8.8H14.4V9.6H13.6zM15.2,8.8H16V9.6H15.2zM16,8.8H16.8V9.6H16zM17.6,8.8H18.4V9.6H17.6zM18.4,8.8H19.2V9.6H18.4zM19.2,8.8H20V9.6H19.2zM21.6,8.8H22.4V9.6H21.6zM24,8.8H24.8V9.6H24zM1.6,9.6H2.4V10.4H1.6zM2.4,9.6H3.2V10.4H2.4zM4.8,9.6H5.6V10.4H4.8zM5.6,9.6H6.4V10.4H5.6zM6.4,9.6H7.2V10.4H6.4zM9.6,9.6H10.4V10.4H9.6zM10.4,9.6H11.2V10.4H10.4zM11.2,9.6H12V10.4H11.2zM12,9.6H12.8V10.4H12zM19.2,9.6H20V10.4H19.2zM20,9.6H20.8V10.4H20zM20.8,9.6H21.6V10.4H20.8zM22.4,9.6H23.2V10.4H22.4zM23.2,9.6H24V10.4H23.2zM24,9.6H24.8V10.4H24zM4.8,10.4H5.6V11.2H4.8zM5.6,10.4H6.4V11.2H5.6zM7.2,10.4H8V11.2H7.2zM8,10.4H8.8V11.2H8zM10.4,10.4H11.2V11.2H10.4zM11.2,10.4H12V11.2H11.2zM13.6,10.4H14.4V11.2H13.6zM15.2,10.4H16V11.2H15.2zM16.8,10.4H17.6V11.2H16.8zM17.6,10.4H18.4V11.2H17.6zM20,10.4H20.8V11.2H20zM20.8,10.4H21.6V11.2H20.8zM23.2,10.4H24V11.2H23.2zM1.6,11.2H2.4V12H1.6zM2.4,11.2H3.2V12H2.4zM3.2,11.2H4V12H3.2zM5.6,11.2H6.4V12H5.6zM6.4,11.2H7.2V12H6.4zM8.8,11.2H9.6V12H8.8zM9.6,11.2H10.4V12H9.6zM10.4,11.2H11.2V12H10.4zM14.4,11.2H15.2V12H14.4zM15.2,11.2H16V12H15.2zM17.6,11.2H18.4V12H17.6zM18.4,11.2H19.2V12H18.4zM19.2,11.2H20V12H19.2zM21.6,11.2H22.4V12H21.6zM23.2,11.2H24V12H23.2zM24,11.2H24.8V12H24zM3.2,12H4V12.8H3.2zM5.6,12H6.4V12.8H5.6zM7.2,12H8V12.8H7.2zM8,12H8.8V12.8H8zM9.6,12H10.4V12.8H9.6zM12,12H12.8V12.8H12zM13.6,12H14.4V12.8H13.6zM14.4,12H15.2V12.8H14.4zM17.6,12H18.4V12.8H17.6zM18.4,12H19.2V12.8H18.4zM19.2,12H20V12.8H19.2zM21.6,12H22.4V12.8H21.6zM24,12H24.8V12.8H24zM4,12.8H4.8V13.6H4zM4.8,12.8H5.6V13.6H4.8zM6.4,12.8H7.2V13.6H6.4zM8.8,12.8H9.6V13.6H8.8zM10.4,12.8H11.2V13.6H10.4zM12.8,12.8H13.6V13.6H12.8zM13.6,12.8H14.4V13.6H13.6zM14.4,12.8H15.2V13.6H14.4zM16,12.8H16.8V13.6H16zM17.6,12.8H18.4V13.6H17.6zM18.4,12.8H19.2V13.6H18.4zM20.8,12.8H21.6V13.6H20.8zM21.6,12.8H22.4V13.6H21.6zM23.2,12.8H24V13.6H23.2zM24,12.8H24.8V13.6H24zM2.4,13.6H3.2V14.4H2.4zM3.2,13.6H4V14.4H3.2zM4,13.6H4.8V14.4H4zM5.6,13.6H6.4V14.4H5.6zM7.2,13.6H8V14.4H7.2zM8,13.6H8.8V14.4H8zM8.8,13.6H9.6V14.4H8.8zM9.6,13.6H10.4V14.4H9.6zM11.2,13.6H12V14.4H11.2zM12,13.6H12.8V14.4H12zM12.8,13.6H13.6V14.4H12.8zM14.4,13.6H15.2V14.4H14.4zM15.2,13.6H16V14.4H15.2zM18.4,13.6H19.2V14.4H18.4zM19.2,13.6H20V14.4H19.2zM20.8,13.6H21.6V14.4H20.8zM21.6,13.6H22.4V14.4H21.6zM23.2,13.6H24V14.4H23.2zM4,14.4H4.8V15.2H4zM5.6,14.4H6.4V15.2H5.6zM6.4,14.4H7.2V15.2H6.4zM8,14.4H8.8V15.2H8zM8.8,14.4H9.6V15.2H8.8zM10.4,14.4H11.2V15.2H10.4zM11.2,14.4H12V15.2H11.2zM12.8,14.4H13.6V15.2H12.8zM13.6,14.4H14.4V15.2H13.6zM14.4,14.4H15.2V15.2H14.4zM15.2,14.4H16V15.2H15.2zM19.2,14.4H20V15.2H19.2zM21.6,14.4H22.4V15.2H21.6zM23.2,14.4H24V15.2H23.2zM24,14.4H24.8V15.2H24zM2.4,15.2H3.2V16H2.4zM4.8,15.2H5.6V16H4.8zM8.8,15.2H9.6V16H8.8zM9.6,15.2H10.4V16H9.6zM10.4,15.2H11.2V16H10.4zM11.2,15.2H12V16H11.2zM12.8,15.2H13.6V16H12.8zM13.6,15.2H14.4V16H13.6zM15.2,15.2H16V16H15.2zM16,15.2H16.8V16H16zM17.6,15.2H18.4V16H17.6zM18.4,15.2H19.2V16H18.4zM19.2,15.2H20V16H19.2zM21.6,15.2H22.4V16H21.6zM22.4,15.2H23.2V16H22.4zM24,15.2H24.8V16H24zM1.6,16H2.4V16.8H1.6zM4,16H4.8V16.8H4zM5.6,16H6.4V16.8H5.6zM6.4,16H7.2V16.8H6.4zM9.6,16H10.4V16.8H9.6zM10.4,16H11.2V16.8H10.4zM12,16H12.8V16.8H12zM18.4,16H19.2V16.8H18.4zM20,16H20.8V16.8H20zM20.8,16H21.6V16.8H20.8zM23.2,16H24V16.8H23.2zM24,16H24.8V16.8H24zM2.4,16.8H3.2V17.6H2.4zM3.2,16.8H4V17.6H3.2zM4,16.8H4.8V17.6H4zM4.8,16.8H5.6V17.6H4.8zM8,16.8H8.8V17.6H8zM14.4,16.8H15.2V17.6H14.4zM15.2,16.8H16V17.6H15.2zM16,16.8H16.8V17.6H16zM17.6,16.8H18.4V17.6H17.6zM21.6,16.8H22.4V17.6H21.6zM23.2,16.8H24V17.6H23.2zM1.6,17.6H2.4V18.4H1.6zM4,17.6H4.8V18.4H4zM6.4,17.6H7.2V18.4H6.4zM7.2,17.6H8V18.4H7.2zM10.4,17.6H11.2V18.4H10.4zM13.6,17.6H14.4V18.4H13.6zM14.4,17.6H15.2V18.4H14.4zM15.2,17.6H16V18.4H15.2zM16.8,17.6H17.6V18.4H16.8zM17.6,17.6H18.4V18.4H17.6zM18.4,17.6H19.2V18.4H18.4zM19.2,17.6H20V18.4H19.2zM20,17.6H20.8V18.4H20zM20.8,17.6H21.6V18.4H20.8zM8,18.4H8.8V19.2H8zM8.8,18.4H9.6V19.2H8.8zM11.2,18.4H12V19.2H11.2zM12,18.4H12.8V19.2H12zM15.2,18.4H16V19.2H15.2zM16.8,18.4H17.6V19.2H16.8zM17.6,18.4H18.4V19.2H17.6zM20.8,18.4H21.6V19.2H20.8zM22.4,18.4H23.2V19.2H22.4zM23.2,18.4H24V19.2H23.2zM24,18.4H24.8V19.2H24zM1.6,19.2H2.4V20H1.6zM2.4,19.2H3.2V20H2.4zM3.2,19.2H4V20H3.2zM4,19.2H4.8V20H4zM4.8,19.2H5.6V20H4.8zM5.6,19.2H6.4V20H5.6zM6.4,19.2H7.2V20H6.4zM8.8,19.2H9.6V20H8.8zM9.6,19.2H10.4V20H9.6zM12.8,19.2H13.6V20H12.8zM15.2,19.2H16V20H15.2zM16,19.2H16.8V20H16zM16.8,19.2H17.6V20H16.8zM17.6,19.2H18.4V20H17.6zM19.2,19.2H20V20H19.2zM20.8,19.2H21.6V20H20.8zM21.6,19.2H22.4V20H21.6zM23.2,19.2H24V20H23.2zM24,19.2H24.8V20H24zM1.6,20H2.4V20.8H1.6zM6.4,20H7.2V20.8H6.4zM12,20H12.8V20.8H12zM12.8,20H13.6V20.8H12.8zM14.4,20H15.2V20.8H14.4zM15.2,20H16V20.8H15.2zM17.6,20H18.4V20.8H17.6zM20.8,20H21.6V20.8H20.8zM21.6,20H22.4V20.8H21.6zM23.2,20H24V20.8H23.2zM1.6,20.8H2.4V21.6H1.6zM3.2,20.8H4V21.6H3.2zM4,20.8H4.8V21.6H4zM4.8,20.8H5.6V21.6H4.8zM6.4,20.8H7.2V21.6H6.4zM8,20.8H8.8V21.6H8zM8.8,20.8H9.6V21.6H8.8zM9.6,20.8H10.4V21.6H9.6zM10.4,20.8H11.2V21.6H10.4zM11.2,20.8H12V21.6H11.2zM12.8,20.8H13.6V21.6H12.8zM13.6,20.8H14.4V21.6H13.6zM14.4,20.8H15.2V21.6H14.4zM15.2,20.8H16V21.6H15.2zM16,20.8H16.8V21.6H16zM17.6,20.8H18.4V21.6H17.6zM18.4,20.8H19.2V21.6H18.4zM19.2,20.8H20V21.6H19.2zM20,20.8H20.8V21.6H20zM20.8,20.8H21.6V21.6H20.8zM24,20.8H24.8V21.6H24zM1.6,21.6H2.4V22.4H1.6zM3.2,21.6H4V22.4H3.2zM4,21.6H4.8V22.4H4zM4.8,21.6H5.6V22.4H4.8zM6.4,21.6H7.2V22.4H6.4zM8.8,21.6H9.6V22.4H8.8zM10.4,21.6H11.2V22.4H10.4zM11.2,21.6H12V22.4H11.2zM12,21.6H12.8V22.4H12zM12.8,21.6H13.6V22.4H12.8zM14.4,21.6H15.2V22.4H14.4zM16.8,21.6H17.6V22.4H16.8zM20.8,21.6H21.6V22.4H20.8zM22.4,21.6H23.2V22.4H22.4zM23.2,21.6H24V22.4H23.2zM24,21.6H24.8V22.4H24zM1.6,22.4H2.4V23.2H1.6zM3.2,22.4H4V23.2H3.2zM4,22.4H4.8V23.2H4zM4.8,22.4H5.6V23.2H4.8zM6.4,22.4H7.2V23.2H6.4zM8,22.4H8.8V23.2H8zM9.6,22.4H10.4V23.2H9.6zM10.4,22.4H11.2V23.2H10.4zM11.2,22.4H12V23.2H11.2zM12.8,22.4H13.6V23.2H12.8zM15.2,22.4H16V23.2H15.2zM16.8,22.4H17.6V23.2H16.8zM20,22.4H20.8V23.2H20zM20.8,22.4H21.6V23.2H20.8zM21.6,22.4H22.4V23.2H21.6zM24,22.4H24.8V23.2H24zM1.6,23.2H2.4V24H1.6zM6.4,23.2H7.2V24H6.4zM9.6,23.2H10.4V24H9.6zM12.8,23.2H13.6V24H12.8zM13.6,23.2H14.4V24H13.6zM15.2,23.2H16V24H15.2zM16.8,23.2H17.6V24H16.8zM17.6,23.2H18.4V24H17.6zM20,23.2H20.8V24H20zM20.8,23.2H21.6V24H20.8zM23.2,23.2H24V24H23.2zM1.6,24H2.4V24.8H1.6zM2.4,24H3.2V24.8H2.4zM3.2,24H4V24.8H3.2zM4,24H4.8V24.8H4zM4.8,24H5.6V24.8H4.8zM5.6,24H6.4V24.8H5.6zM6.4,24H7.2V24.8H6.4zM8,24H8.8V24.8H8zM9.6,24H10.4V24.8H9.6zM12.8,24H13.6V24.8H12.8zM13.6,24H14.4V24.8H13.6zM14.4,24H15.2V24.8H14.4zM15.2,24H16V24.8H15.2zM16.8,24H17.6V24.8H16.8zM17.6,24H18.4V24.8H17.6zM23.2,24H24V24.8H23.2zM24,24H24.8V24.8H24z" fill="#a86f2d" fill-rule="nonzero" stroke="none" /></svg>
+				</div>
+			</a>
+			<a class="portfolio-label" href="https://julian-florez.github.io/" target="_blank" rel="noreferrer noopener">Portafolio</a>
+		</section>
+
+		<section class="content-grid">
+			<div class="right-column">
+				<section class="section">
+					<h2 class="section-title">Educación <span>/ Education</span></h2>
+					<div class="timeline">
+						<article class="timeline-item">
+							<div class="item-title">Plan de estudios en Software Developer</div>
+							<div class="item-subtitle">Universidad EAN - Bogotá, Colombia</div>
+							<div class="item-date">[03. 2026]</div>
+						</article>
+
+						<article class="timeline-item">
+							<div class="item-title">Curso en herramientas básicas de innovación</div>
+							<div class="item-subtitle">Universidad EAN - Bogotá, Colombia</div>
+							<div class="item-date">[05. 2025]</div>
+						</article>
+
+						<article class="timeline-item">
+							<div class="item-title">Pregrado en Ingeniería de Sistemas</div>
+							<div class="item-subtitle">Universidad EAN - Bogotá, Colombia</div>
+							<div class="item-date">[02. 2023 - Actualidad]</div>
+						</article>
+
+						<article class="timeline-item">
+							<div class="item-title">Bachillerato académico</div>
+							<div class="item-subtitle">Colegio Mundo Nuevo - Bogotá, Colombia</div>
+							<div class="item-date">[2021]</div>
+						</article>
+					</div>
+				</section>
+
+				<section class="section">
+					<h2 class="section-title">Aptitudes técnicas <span>/ Skills</span></h2>
+					<div class="skills-stack">
+						<article class="skill-card">
+							<div class="item-title">HTML, CSS, JavaScript</div>
+							<div class="item-description">Construcción de interfaces web interactivas y adaptables con enfoque en experiencia de usuario y el rendimiento del front-end.</div>
+						</article>
+
+						<article class="skill-card">
+							<div class="item-title">Kotlin, Jetpack Compose, Kotlin Multiplatform</div>
+							<div class="item-description">Desarrollo de aplicaciones móviles nativas, optimización de tiempos de despliegue mediante lógica de negocio entre plataformas.</div>
+						</article>
+
+						<article class="skill-card">
+							<div class="item-title">Python y Java</div>
+							<div class="item-description">Programación de soluciones robustas de backend, automatización de tareas complejas y desarrollo de lógica de software escalable para aplicaciones empresariales.</div>
+						</article>
+
+						<article class="skill-card">
+							<div class="item-title">Sistemas de Diseño</div>
+							<div class="item-description">Diseño e implementación de sistemas con consistencia visual y funcional en diversos entornos.</div>
+						</article>
+
+						<article class="skill-card">
+							<div class="item-title">Ingeniería asistida por IA</div>
+							<div class="item-description">Orquestador de flujos de trabajo basados en IA agéntica como herramienta de alta productividad para la ejecución técnica, garantizando el control arquitectónico y la integridad del código basado en fundamentos de ingeniería.</div>
+						</article>
+
+						<article class="skill-card">
+							<div class="item-title">Soporte técnico y hardware</div>
+							<div class="item-description">Gestión y mantenimiento preventivo de equipos, comprensión del rendimiento de softwares y su interacción directa con los recursos físicos.</div>
+						</article>
+					</div>
+				</section>
+			</div>
+
+			<div>
+				<section class="section interests">
+					<h2 class="section-title">Intereses profesionales <span>/ Professional Interests</span></h2>
+					<div class="feature-list">
+						<article class="feature-item">
+							<div class="item-description">Integrar equipos de desarrollo ágiles, aplicando principios de clean code y patrones de diseño sistemático asegurando calidad y escalabilidad del producto final.</div>
+						</article>
+
+						<article class="feature-item">
+							<div class="item-description">Contribuir de forma activa a iniciativas de innovación a través de soluciones eficientes que optimicen procesos operativos.</div>
+						</article>
+
+						<article class="feature-item">
+							<div class="item-description">Participar en el campo de investigación para la exploración de nuevas tecnologías emergentes.</div>
+						</article>
+					</div>
+				</section>
+
+				<section class="section">
+					<h2 class="section-title">Habilidades blandas <span>/ Soft Skills</span></h2>
+					<div class="soft-skills-grid soft-skills">
+						<div class="soft-skill">Adaptabilidad</div>
+						<div class="soft-skill">Resolución de problemas</div>
+						<div class="soft-skill">Autodidactismo</div>
+						<div class="soft-skill">Comunicación asertiva y efectiva</div>
+						<div class="soft-skill">Proactividad</div>
+						<div class="soft-skill">Escucha activa</div>
+						<div class="soft-skill">Trabajo colaborativo</div>
+						<div class="soft-skill">Liderazgo y toma de decisiones</div>
+					</div>
+				</section>
+
+				<section class="section">
+					<h2 class="section-title">Idiomas <span>/ Languages</span></h2>
+					<div class="languages-grid languages">
+						<article class="language-item">
+							<div class="item-title">Español</div>
+							<div class="language-detail">Competencia nativa</div>
+						</article>
+
+						<article class="language-item">
+							<div class="item-title">Inglés</div>
+							<div class="language-detail">Competencia profesional - Nivel B2</div>
+						</article>
+					</div>
+				</section>
+
+				<section class="section">
+					<h2 class="section-title">Referencias <span>/ References</span></h2>
+					<div class="references-grid references">
+						<article class="reference-item">
+							<div class="item-title">Camila Andrea Peña Caballero</div>
+							<div class="reference-detail">313 2959036</div>
+						</article>
+
+						<article class="reference-item">
+							<div class="item-title">Estefania Rodríguez Mosquera</div>
+							<div class="reference-detail">318 8489523</div>
+						</article>
+
+						<article class="reference-item">
+							<div class="item-title">Santiago Ramos Graterón</div>
+							<div class="reference-detail">333 2709974</div>
+						</article>
+
+						<article class="reference-item">
+							<div class="item-title">Daniel Marín Alarcón</div>
+							<div class="reference-detail">305 8129836</div>
+						</article>
+					</div>
+				</section>
+			</div>
+		</section>
+	</main>
+	<script>
+		(function () {
+			const page = document.querySelector('.page');
+			if (!page) {
+				return;
+			}
+
+			const printMedia = window.matchMedia('print');
+
+			function resetPrintScale() {
+				page.style.zoom = '';
+				document.documentElement.style.setProperty('--print-scale', '1');
+			}
+
+			function applyPrintScale() {
+				if (!printMedia.matches) {
+					return;
+				}
+
+				page.style.zoom = '1';
+
+				const availableWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+				const availableHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+				const contentWidth = page.scrollWidth;
+				const contentHeight = page.scrollHeight;
+
+				if (!availableWidth || !availableHeight || !contentWidth || !contentHeight) {
+					return;
+				}
+
+				const widthScale = availableWidth / contentWidth;
+				const heightScale = availableHeight / contentHeight;
+				const fittedScale = Math.min(widthScale, heightScale, 1.18);
+				const safeScale = Math.max(fittedScale * 0.985, 0.7);
+
+				document.documentElement.style.setProperty('--print-scale', String(safeScale));
+				page.style.zoom = String(safeScale);
+			}
+
+			function schedulePrintScale() {
+				requestAnimationFrame(function () {
+					requestAnimationFrame(applyPrintScale);
+				});
+			}
+
+			window.addEventListener('beforeprint', schedulePrintScale);
+			window.addEventListener('afterprint', resetPrintScale);
+			window.addEventListener('resize', function () {
+				if (printMedia.matches) {
+					schedulePrintScale();
+				}
+			});
+
+			if (printMedia.addEventListener) {
+				printMedia.addEventListener('change', function (event) {
+					if (event.matches) {
+						schedulePrintScale();
+					} else {
+						resetPrintScale();
+					}
+				});
+			}
+		})();
+	</script>
+</body>
+</html>

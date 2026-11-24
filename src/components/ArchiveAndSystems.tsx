@@ -20,6 +20,7 @@ const categories = [
 export const ArchiveAndSystems: React.FC<ArchiveAndSystemsProps> = ({ lang }) => {
   const [selectedCat, setSelectedCat] = useState<(typeof categories)[number]>('All');
   const [query, setQuery] = useState('');
+  const [showAll, setShowAll] = useState(false);
   const ta = copy[lang].archive;
   const tc = copy[lang].contact;
 
@@ -37,12 +38,14 @@ export const ArchiveAndSystems: React.FC<ArchiveAndSystemsProps> = ({ lang }) =>
       );
     });
   }, [selectedCat, query, lang]);
+  const defaultView = selectedCat === 'All' && !query.trim();
+  const visibleItems = defaultView && !showAll ? filtered.slice(0, 8) : filtered;
 
   return (
     <>
       {/* Complete Archive Section */}
-      <section id="archive" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
-        <div className="mb-8 max-w-3xl">
+      <section id="archive" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-24">
+        <div className="mb-6 max-w-3xl lg:mb-8">
           <span
             className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-bold tracking-wider uppercase"
             style={{
@@ -62,8 +65,8 @@ export const ArchiveAndSystems: React.FC<ArchiveAndSystemsProps> = ({ lang }) =>
         </div>
 
         {/* Search & Filter Chips */}
-        <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="flex flex-wrap gap-2">
+        <div className="mb-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="flex gap-2 overflow-x-auto pb-1 md:flex-wrap md:overflow-visible md:pb-0">
             {categories.map((cat) => {
               const active = selectedCat === cat;
               return (
@@ -72,7 +75,7 @@ export const ArchiveAndSystems: React.FC<ArchiveAndSystemsProps> = ({ lang }) =>
                   type="button"
                   onClick={() => setSelectedCat(cat)}
                   aria-pressed={active}
-                  className="m3-pill min-h-11 px-3.5 py-1.5 text-xs font-semibold cursor-pointer"
+                  className="m3-pill min-h-11 shrink-0 px-3.5 py-1.5 text-xs font-semibold cursor-pointer"
                   style={{
                     backgroundColor: active ? 'var(--m3-primary)' : 'var(--m3-surface-container-low)',
                     color: active ? 'var(--m3-on-primary)' : 'var(--m3-on-surface-variant)',
@@ -105,14 +108,14 @@ export const ArchiveAndSystems: React.FC<ArchiveAndSystemsProps> = ({ lang }) =>
         </div>
 
         <p role="status" className="mb-4 text-sm font-medium" style={{ color: 'var(--m3-on-surface-variant)' }}>
-          {lang === 'es' ? `${filtered.length} proyectos en esta vista` : `${filtered.length} projects in this view`}
+          {lang === 'es' ? `Mostrando ${visibleItems.length} de ${filtered.length} proyectos` : `Showing ${visibleItems.length} of ${filtered.length} projects`}
         </p>
         {filtered.length === 0 && <p className="rounded-xl p-6 text-sm" style={{ backgroundColor: 'var(--m3-surface-container-low)' }}>{ta.noResults}</p>}
-        <div className="grid gap-4 md:grid-cols-2">
-          {filtered.map((item) => (
+        <div className="grid gap-3 md:grid-cols-2">
+          {visibleItems.map((item) => (
             <article
               key={item.name}
-              className="archive-project flex h-full flex-col rounded-[28px] p-5 sm:p-6"
+              className="archive-project flex h-full flex-col rounded-3xl p-4 sm:p-5"
               style={{ backgroundColor: 'var(--m3-surface-container-low)' }}
             >
               <div className="flex min-w-0 flex-1 flex-col">
@@ -125,15 +128,16 @@ export const ArchiveAndSystems: React.FC<ArchiveAndSystemsProps> = ({ lang }) =>
                     </span>
                   ) : <span className="text-xs" style={{ color: 'var(--m3-on-surface-variant)' }}>{lang === 'es' ? 'Repositorio público' : 'Public repository'}</span>}
                 </div>
-                <h3 className="mt-5 font-display text-xl font-extrabold tracking-tight">{item.name}</h3>
+                <h3 className="mt-3 font-display text-lg font-extrabold tracking-tight">{item.name}</h3>
                 <p className="mt-2 text-sm font-medium leading-relaxed" style={{ color: 'var(--m3-on-surface)' }}>
                   {item.desc[lang]}
                 </p>
-                <p className="mt-3 text-sm leading-relaxed" style={{ color: 'var(--m3-on-surface-variant)' }}>
-                  {archiveDetails[item.name]?.[lang]}
-                </p>
+                {archiveDetails[item.name]?.[lang] && <details className="mt-3 text-sm leading-relaxed" style={{ color: 'var(--m3-on-surface-variant)' }}>
+                  <summary className="min-h-11 cursor-pointer py-2 font-semibold" style={{ color: 'var(--m3-primary)' }}>{lang === 'es' ? 'Leer el trabajo realizado' : 'Read the work behind it'}</summary>
+                  <p className="pb-1">{archiveDetails[item.name][lang]}</p>
+                </details>}
               </div>
-              <div className="mt-6 flex items-center justify-between gap-3">
+              <div className="mt-3 flex items-center justify-between gap-3">
                 <span className="font-mono text-xs" style={{ color: 'var(--m3-on-surface-variant)' }}>{item.lang}</span>
                 {item.url && <a href={item.url} target="_blank" rel="noreferrer" className="project-link inline-flex min-h-11 items-center gap-1 rounded-full px-4 text-sm font-bold" style={{ backgroundColor: 'var(--m3-primary)', color: 'var(--m3-on-primary)' }}>
                   {lang === 'es' ? 'Ver código' : 'View code'} <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
@@ -142,6 +146,13 @@ export const ArchiveAndSystems: React.FC<ArchiveAndSystemsProps> = ({ lang }) =>
             </article>
           ))}
         </div>
+        {defaultView && filtered.length > 8 && (
+          <div className="mt-6 flex justify-center">
+            <button type="button" onClick={() => setShowAll((value) => !value)} className="m3-pill min-h-11 px-6 py-2.5 text-sm font-bold cursor-pointer" style={{ backgroundColor: 'var(--m3-primary-container)', color: 'var(--m3-on-primary-container)' }}>
+              {showAll ? (lang === 'es' ? 'Mostrar menos' : 'Show fewer') : (lang === 'es' ? `Ver los ${filtered.length - 8} restantes` : `Show ${filtered.length - 8} more`)}
+            </button>
+          </div>
+        )}
       </section>
 
       {/* Contact Footer Card */}

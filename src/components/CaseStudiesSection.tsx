@@ -91,15 +91,15 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({ lang }) 
               <p className="mt-1 text-sm leading-relaxed" style={{ color: 'var(--m3-on-surface)' }}>
                 {study.objective[lang]}
               </p>
-              <p className="mt-4 text-xs font-bold uppercase tracking-wide" style={{ color: 'var(--m3-primary)' }}>
+              <p className="mt-4 hidden text-xs font-bold uppercase tracking-wide lg:block" style={{ color: 'var(--m3-primary)' }}>
                 {t.builtLabel}
               </p>
-              <p className="mt-1 text-sm leading-relaxed" style={{ color: 'var(--m3-on-surface-variant)' }}>
+              <p className="mt-1 hidden text-sm leading-relaxed lg:block" style={{ color: 'var(--m3-on-surface-variant)' }}>
                 {study.description[lang]}
               </p>
 
               <div
-                className="mt-4 text-xs"
+                className="mt-4 hidden text-xs lg:block"
               >
                 <div className="mb-1 flex items-center gap-1.5 font-bold" style={{ color: 'var(--m3-primary)' }}>
                   <Bot className="h-3.5 w-3.5" />

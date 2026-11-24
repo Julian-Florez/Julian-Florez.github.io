@@ -78,7 +78,11 @@ body {
 
 *, *::before, *::after { box-sizing: border-box; }
 
-section, footer { scroll-margin-top: 9rem; }
+section, footer { scroll-margin-top: 5rem; }
+
+@media (min-width: 1280px) {
+  section, footer { scroll-margin-top: 7rem; }
+}
 
 :focus-visible {
   outline: 3px solid var(--m3-primary);

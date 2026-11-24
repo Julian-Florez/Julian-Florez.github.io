@@ -27,6 +27,16 @@ const nodeIcons: Record<string, React.ReactNode> = {
   'tailscale-nixos': <Network className="h-5 w-5" />,
 };
 
+const shortNodeNames: Record<string, string> = {
+  'tailscale-nixos': 'NixOS + Tailscale',
+  remotecast: 'RemoteCast',
+  extendcast: 'ExtendCast',
+  vrcast: 'VRCast',
+  sounddrift: 'SoundDrift',
+  share: 'Share',
+  agi: 'Agi',
+};
+
 export const EcosystemHub: React.FC<EcosystemHubProps> = ({ lang }) => {
   const [selectedId, setSelectedId] = useState('tailscale-nixos');
   const t = copy[lang].ecosystem;
@@ -37,8 +47,8 @@ export const EcosystemHub: React.FC<EcosystemHubProps> = ({ lang }) => {
   const active = ecosystemNodes.find((n) => n.id === selectedId) ?? orderedNodes[0];
 
   return (
-    <section id="ecosystem" className="network-section mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
-      <div className="mb-10 max-w-3xl">
+    <section id="ecosystem" className="network-section mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-24">
+      <div className="mb-6 max-w-3xl lg:mb-10">
         <span
           className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-bold tracking-wider uppercase"
           style={{
@@ -59,7 +69,7 @@ export const EcosystemHub: React.FC<EcosystemHubProps> = ({ lang }) => {
 
       {/* Bridge Header Visual */}
       <div
-        className="network-map mb-8 grid items-center gap-4 rounded-3xl p-5 sm:grid-cols-[1fr_auto_1fr] sm:p-7"
+        className="network-map mb-8 hidden items-center gap-4 rounded-3xl p-5 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:p-7"
         style={{
           backgroundColor: 'var(--m3-surface-container)',
         }}
@@ -101,13 +111,13 @@ export const EcosystemHub: React.FC<EcosystemHubProps> = ({ lang }) => {
         </div>
       </div>
 
-      <p className="mb-4 text-sm font-medium" style={{ color: 'var(--m3-on-surface-variant)' }}>
+      <p className="mb-4 hidden text-sm font-medium lg:block" style={{ color: 'var(--m3-on-surface-variant)' }}>
         {t.selectPrompt}
       </p>
 
-      <div className="grid gap-6 lg:grid-cols-12">
+      <div className="grid gap-4 lg:grid-cols-12 lg:gap-6">
         {/* Left: Node Selector */}
-        <div className="flex flex-col gap-3 lg:col-span-5">
+        <div className="flex gap-2 overflow-x-auto pb-2 lg:col-span-5 lg:flex-col lg:gap-3 lg:overflow-visible lg:pb-0">
           {orderedNodes.map((node) => {
             const isSelected = node.id === selectedId;
             return (
@@ -116,7 +126,7 @@ export const EcosystemHub: React.FC<EcosystemHubProps> = ({ lang }) => {
                 type="button"
                 onClick={() => setSelectedId(node.id)}
                 aria-pressed={isSelected}
-                className="m3-card network-option flex items-start gap-4 p-4 text-left cursor-pointer"
+                className="m3-card network-option flex min-h-12 shrink-0 items-center gap-3 px-4 py-2 text-left cursor-pointer lg:items-start lg:gap-4 lg:p-4"
                 style={{
                   backgroundColor: isSelected
                     ? 'var(--m3-primary-container)'
@@ -125,7 +135,7 @@ export const EcosystemHub: React.FC<EcosystemHubProps> = ({ lang }) => {
                 }}
               >
                 <div
-                  className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl"
+                  className="mt-0.5 hidden h-10 w-10 shrink-0 items-center justify-center rounded-2xl lg:flex"
                   style={{
                     backgroundColor: isSelected
                       ? 'var(--m3-primary)'
@@ -137,10 +147,11 @@ export const EcosystemHub: React.FC<EcosystemHubProps> = ({ lang }) => {
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="font-display text-base font-bold">{node.name}</span>
+                    <span className="font-display text-base font-bold lg:hidden">{shortNodeNames[node.id] ?? node.name}</span>
+                    <span className="hidden font-display text-base font-bold lg:inline">{node.name}</span>
                   </div>
                   <span
-                    className="mt-1 inline-block rounded-full px-2.5 py-0.5 font-mono text-[11px] font-semibold"
+                    className="mt-1 hidden rounded-full px-2.5 py-0.5 font-mono text-[11px] font-semibold lg:inline-block"
                     style={{
                       backgroundColor: isSelected
                         ? 'color-mix(in srgb, var(--m3-on-primary-container) 12%, transparent)'
@@ -160,7 +171,7 @@ export const EcosystemHub: React.FC<EcosystemHubProps> = ({ lang }) => {
             <div
               key={active.id}
               aria-live="polite"
-              className="m3-card detail-enter h-full p-6 sm:p-8"
+              className="m3-card detail-enter h-full p-5 sm:p-8"
               style={{ backgroundColor: 'var(--m3-surface-container-low)' }}
             >
               <div className="flex flex-wrap items-center justify-between gap-2">

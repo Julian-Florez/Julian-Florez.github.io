@@ -9,12 +9,13 @@ interface AgenticPlaybookProps {
 
 export const AgenticPlaybook: React.FC<AgenticPlaybookProps> = ({ lang }) => {
   const [activeId, setActiveId] = useState(agenticCases[0].id);
+  const [showDetails, setShowDetails] = useState(false);
   const t = copy[lang].playbook;
   const active = agenticCases.find((c) => c.id === activeId) ?? agenticCases[0];
 
   return (
-    <section id="agentic" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
-      <div className="mb-10 max-w-3xl">
+    <section id="agentic" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-24">
+      <div className="mb-6 max-w-3xl lg:mb-10">
         <span
           className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-bold tracking-wider uppercase"
           style={{
@@ -33,16 +34,16 @@ export const AgenticPlaybook: React.FC<AgenticPlaybookProps> = ({ lang }) => {
       </div>
 
       {/* Selector Pills */}
-      <div className="mb-8 flex flex-wrap gap-3">
+      <div className="mb-5 flex gap-2 overflow-x-auto pb-2 lg:mb-8 lg:flex-wrap lg:gap-3 lg:overflow-visible lg:pb-0">
         {agenticCases.map((item) => {
           const selected = item.id === activeId;
           return (
             <button
               key={item.id}
               type="button"
-              onClick={() => setActiveId(item.id)}
+              onClick={() => { setActiveId(item.id); setShowDetails(false); }}
               aria-pressed={selected}
-              className="m3-pill flex items-center gap-2.5 px-5 py-3 text-left text-sm font-semibold cursor-pointer"
+              className="m3-pill flex min-h-11 shrink-0 items-center gap-2.5 px-4 py-2 text-left text-sm font-semibold cursor-pointer lg:px-5 lg:py-3"
               style={{
                 backgroundColor: selected
                   ? 'var(--m3-primary)'
@@ -50,7 +51,8 @@ export const AgenticPlaybook: React.FC<AgenticPlaybookProps> = ({ lang }) => {
                 color: selected ? 'var(--m3-on-primary)' : 'var(--m3-on-surface)',
               }}
             >
-              <span>{item.title[lang]}</span>
+              <span className="lg:hidden">{item.id === 'mindfull-research' ? 'Mindfull' : item.id === 'vrcast-multiagent' ? 'VRCast' : item.id === 'win2apk-codex' ? 'Win2APK' : 'Agi'}</span>
+              <span className="hidden lg:inline">{item.title[lang]}</span>
             </button>
           );
         })}
@@ -59,7 +61,7 @@ export const AgenticPlaybook: React.FC<AgenticPlaybookProps> = ({ lang }) => {
       <div
           key={active.id}
           aria-live="polite"
-          className="m3-card p-6 sm:p-8"
+          className="m3-card p-5 sm:p-8"
           style={{ backgroundColor: 'var(--m3-surface-container-low)' }}
         >
           <div className="flex flex-wrap items-center justify-between gap-4 pb-6">
@@ -95,6 +97,11 @@ export const AgenticPlaybook: React.FC<AgenticPlaybookProps> = ({ lang }) => {
             ))}
           </div>
 
+          <button type="button" onClick={() => setShowDetails((visible) => !visible)} aria-expanded={showDetails} className="m3-pill min-h-11 w-full px-5 py-2.5 text-sm font-bold cursor-pointer md:hidden" style={{ backgroundColor: 'var(--m3-primary-container)', color: 'var(--m3-on-primary-container)' }}>
+            {showDetails ? (lang === 'es' ? 'Ocultar decisiones y pruebas' : 'Hide decisions and checks') : (lang === 'es' ? 'Ver decisiones y pruebas' : 'See decisions and checks')}
+          </button>
+
+          <div className={showDetails ? 'mt-5 block md:mt-0' : 'hidden md:block'}>
           {/* Human vs Agent Split */}
           <div className="grid gap-6 md:grid-cols-2">
             <div
@@ -166,6 +173,7 @@ export const AgenticPlaybook: React.FC<AgenticPlaybookProps> = ({ lang }) => {
               <strong className="font-display">{t.verification}: </strong>
               <span>{active.verificationLoop[lang]}</span>
             </div>
+          </div>
           </div>
       </div>
     </section>

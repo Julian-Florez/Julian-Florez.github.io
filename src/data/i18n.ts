@@ -9,7 +9,6 @@ export const copy = {
       arcade: 'Arcade',
       archive: 'All Projects',
       contact: 'Contact',
-      search: 'Search',
     },
     hero: {
       badge: 'Systems Engineer · Universidad EAN',
@@ -70,11 +69,9 @@ export const copy = {
       eyebrow: 'Project archive',
       title: 'More projects',
       subtitle:
-        'Search by project or technology.',
-      searchPlaceholder: 'Search by name, tech, or keyword (e.g. Rust, Tailscale, KMP)...',
-      publicSearchPlaceholder: 'Search public repositories',
+        'More work across Android, Linux, AI and the web.',
       all: 'All',
-      noResults: 'No projects match these filters. Try another term or choose All.',
+      noResults: 'No projects in this category. Choose All to see the archive.',
     },
     contact: {
       title: 'Get in touch',
@@ -94,7 +91,6 @@ export const copy = {
       arcade: 'El Arcade',
       archive: 'Archivo',
       contact: 'Contacto',
-      search: 'Buscar',
     },
     hero: {
       badge: 'Ingeniero de Sistemas · Universidad EAN',
@@ -155,11 +151,9 @@ export const copy = {
       eyebrow: 'Archivo de proyectos',
       title: 'Más proyectos',
       subtitle:
-        'Busca por proyecto o tecnología.',
-      searchPlaceholder: 'Buscar por nombre, tecnología o palabra clave (ej. Rust, Tailscale, KMP)...',
-      publicSearchPlaceholder: 'Buscar repositorios públicos',
+        'Más trabajos de Android, Linux, IA y web.',
       all: 'Todos',
-      noResults: 'No hay proyectos con estos filtros. Prueba otro término o elige Todos.',
+      noResults: 'No hay proyectos en esta categoría. Elige Todos para ver el archivo.',
     },
     contact: {
       title: 'Hablemos',

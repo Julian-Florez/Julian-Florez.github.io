@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Search, X } from 'lucide-react';
 import { copy, type Lang } from '../data/i18n';
-import { archiveItems } from '../data/projects';
 import { TopAppBar } from './TopAppBar';
 import { AgenticPlaybook } from './AgenticPlaybook';
 import { EcosystemHub } from './EcosystemHub';
 import { CaseStudiesSection } from './CaseStudiesSection';
 import { KmpArcade } from './KmpArcade';
 import { ArchiveAndSystems } from './ArchiveAndSystems';
-import { useModalKeyboard } from './useModalKeyboard';
 
 export const PortfolioApp: React.FC = () => {
   const [lang, setLang] = useState<Lang>('es');
-  const [cmdOpen, setCmdOpen] = useState(false);
-  const [cmdQuery, setCmdQuery] = useState('');
-  const commandDialogRef = useModalKeyboard(cmdOpen, () => setCmdOpen(false));
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -48,40 +42,11 @@ export const PortfolioApp: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        setCmdOpen((v) => !v);
-      } else if (e.key === 'Escape') {
-        setCmdOpen(false);
-      }
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, []);
-
   const hero = copy[lang].hero;
-  const cmdResults = archiveItems
-    .filter((i) => {
-      if (!i.url) return false;
-      const q = cmdQuery.trim().toLowerCase();
-      if (!q) return true;
-      return (
-        i.name.toLowerCase().includes(q) ||
-        i.lang.toLowerCase().includes(q) ||
-        i.desc[lang].toLowerCase().includes(q)
-      );
-    })
-    .slice(0, 8);
 
   return (
     <div className="min-h-screen">
-      <TopAppBar
-        lang={lang}
-        setLang={setLang}
-        onOpenCommand={() => setCmdOpen(true)}
-      />
+      <TopAppBar lang={lang} setLang={setLang} />
 
       <main id="main">
       <section className="hero-intro mx-auto max-w-7xl px-4 pb-8 pt-8 sm:px-6 lg:pb-12 lg:pt-20">
@@ -200,79 +165,6 @@ export const PortfolioApp: React.FC = () => {
       <ArchiveAndSystems lang={lang} />
       </main>
 
-      {cmdOpen && (
-          <div
-            className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 p-4 pt-20 backdrop-blur-sm"
-            onClick={() => setCmdOpen(false)}
-          >
-            <div
-              ref={commandDialogRef}
-              className="w-full max-w-xl overflow-hidden rounded-[28px] border shadow-2xl"
-              role="dialog"
-              aria-modal="true"
-              aria-label={copy[lang].archive.publicSearchPlaceholder}
-              style={{
-                backgroundColor: 'var(--m3-surface-container-lowest)',
-                borderColor: 'var(--m3-outline-variant)',
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div
-                className="flex items-center gap-3 border-b px-4 py-3"
-                style={{ borderColor: 'var(--m3-outline-variant)' }}
-              >
-                <Search className="h-4 w-4" style={{ color: 'var(--m3-primary)' }} />
-                <input
-                  autoFocus
-                  type="text"
-                  value={cmdQuery}
-                  onChange={(e) => setCmdQuery(e.target.value)}
-                  placeholder={copy[lang].archive.publicSearchPlaceholder}
-                  aria-label={copy[lang].archive.publicSearchPlaceholder}
-                  className="min-h-11 w-full bg-transparent text-sm"
-                />
-                <button
-                  type="button"
-                  onClick={() => setCmdOpen(false)}
-                  aria-label={lang === 'es' ? 'Cerrar búsqueda' : 'Close search'}
-                  className="flex h-11 w-11 items-center justify-center rounded-full cursor-pointer"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-              <div className="max-h-80 overflow-y-auto p-2">
-                {cmdResults.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={() => setCmdOpen(false)}
-                    className="flex items-center justify-between rounded-2xl px-3.5 py-2.5 text-sm hover:opacity-85"
-                    style={{ backgroundColor: 'transparent' }}
-                  >
-                    <div>
-                      <div className="font-display font-bold">{item.name}</div>
-                      <div className="text-xs" style={{ color: 'var(--m3-on-surface-variant)' }}>
-                        {item.desc[lang]}
-                      </div>
-                    </div>
-                    <span
-                      className="rounded-full px-2.5 py-0.5 font-mono text-[11px]"
-                      style={{
-                        backgroundColor: 'var(--m3-surface-container)',
-                        color: 'var(--m3-primary)',
-                      }}
-                    >
-                      {item.lang}
-                    </span>
-                  </a>
-                ))}
-                {cmdResults.length === 0 && <p className="p-4 text-sm">{copy[lang].archive.noResults}</p>}
-              </div>
-            </div>
-          </div>
-      )}
     </div>
   );
 };

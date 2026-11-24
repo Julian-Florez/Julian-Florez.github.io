@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Menu, Search, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { copy, type Lang } from '../data/i18n';
 
 interface TopAppBarProps {
   lang: Lang;
   setLang: (l: Lang) => void;
-  onOpenCommand: () => void;
 }
 
-export const TopAppBar: React.FC<TopAppBarProps> = ({ lang, setLang, onOpenCommand }) => {
+export const TopAppBar: React.FC<TopAppBarProps> = ({ lang, setLang }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const t = copy[lang].nav;
   const destinations = [
@@ -59,12 +58,7 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({ lang, setLang, onOpenComma
         </div>
 
         <div className="flex items-center gap-1 sm:gap-2">
-          <a href="#archive" onClick={() => setMenuOpen(false)} className="flex min-h-11 items-center rounded-xl px-2.5 text-sm font-semibold xl:hidden" style={{ backgroundColor: 'var(--m3-primary-container)', color: 'var(--m3-on-primary-container)' }}>{t.archive}</a>
-          <button type="button" onClick={() => { setMenuOpen(false); onOpenCommand(); }} aria-label={copy[lang].archive.publicSearchPlaceholder} className="flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-xl cursor-pointer" style={{ backgroundColor: 'var(--m3-surface-container)', color: 'var(--m3-on-surface)' }}>
-            <Search className="h-4 w-4" aria-hidden="true" />
-            <span className="hidden text-xs font-medium md:inline">{t.search}</span>
-          </button>
-          <div className="hidden items-center rounded-full p-0.5 md:flex" style={{ backgroundColor: 'var(--m3-surface-container)' }}>{languageButtons}</div>
+          <div className="hidden items-center rounded-full p-0.5 xl:flex" style={{ backgroundColor: 'var(--m3-surface-container)' }}>{languageButtons}</div>
           <button type="button" aria-label={lang === 'es' ? 'Secciones' : 'Sections'} aria-expanded={menuOpen} aria-controls="mobile-sections" onClick={() => setMenuOpen((open) => !open)} className="flex min-h-11 min-w-11 items-center justify-center rounded-xl cursor-pointer xl:hidden" style={{ backgroundColor: 'var(--m3-surface-container)', color: 'var(--m3-on-surface)' }}>
             {menuOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
           </button>
@@ -76,7 +70,7 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({ lang, setLang, onOpenComma
             <div className="grid grid-cols-2 gap-1">
               {destinations.map((item) => <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className="flex min-h-11 items-center rounded-xl px-3 text-sm font-semibold" style={{ backgroundColor: 'var(--m3-surface-container-lowest)' }}>{item.label}</a>)}
             </div>
-            <div className="mt-3 flex items-center justify-between px-2 md:hidden">
+            <div className="mt-3 flex items-center justify-between px-2">
               <span className="text-xs font-medium">{lang === 'es' ? 'Idioma' : 'Language'}</span>
               <div className="flex rounded-full p-0.5" style={{ backgroundColor: 'var(--m3-surface-container-lowest)' }}>{languageButtons}</div>
             </div>

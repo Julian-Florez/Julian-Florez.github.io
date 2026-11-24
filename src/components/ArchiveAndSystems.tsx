@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { ArrowUpRight, FolderGit2, Lock, Mail, Search } from 'lucide-react';
+import { ArrowUpRight, FolderGit2, Lock, Mail } from 'lucide-react';
 import { archiveItems } from '../data/projects';
 import { archiveDetails } from '../data/archive-details';
 import { copy, type Lang } from '../data/i18n';
@@ -19,26 +19,14 @@ const categories = [
 
 export const ArchiveAndSystems: React.FC<ArchiveAndSystemsProps> = ({ lang }) => {
   const [selectedCat, setSelectedCat] = useState<(typeof categories)[number]>('All');
-  const [query, setQuery] = useState('');
   const [showAll, setShowAll] = useState(false);
   const ta = copy[lang].archive;
   const tc = copy[lang].contact;
 
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return archiveItems.filter((item) => {
-      const catMatch = selectedCat === 'All' || item.category === selectedCat;
-      if (!catMatch) return false;
-      if (!q) return true;
-      return (
-        item.name.toLowerCase().includes(q) ||
-        item.lang.toLowerCase().includes(q) ||
-        item.desc[lang].toLowerCase().includes(q) ||
-        archiveDetails[item.name]?.[lang].toLowerCase().includes(q)
-      );
-    });
-  }, [selectedCat, query, lang]);
-  const defaultView = selectedCat === 'All' && !query.trim();
+    return archiveItems.filter((item) => selectedCat === 'All' || item.category === selectedCat);
+  }, [selectedCat]);
+  const defaultView = selectedCat === 'All';
   const visibleItems = defaultView && !showAll ? filtered.slice(0, 8) : filtered;
 
   return (
@@ -64,8 +52,7 @@ export const ArchiveAndSystems: React.FC<ArchiveAndSystemsProps> = ({ lang }) =>
           </p>
         </div>
 
-        {/* Search & Filter Chips */}
-        <div className="mb-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="mb-5">
           <div className="flex gap-2 overflow-x-auto pb-1 md:flex-wrap md:overflow-visible md:pb-0">
             {categories.map((cat) => {
               const active = selectedCat === cat;
@@ -87,24 +74,6 @@ export const ArchiveAndSystems: React.FC<ArchiveAndSystemsProps> = ({ lang }) =>
             })}
           </div>
 
-          <div className="relative w-full md:w-80">
-            <Search
-              className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2"
-              style={{ color: 'var(--m3-on-surface-variant)' }}
-            />
-            <input
-              type="text"
-              aria-label={lang === 'es' ? 'Buscar en el archivo de proyectos' : 'Search the project archive'}
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder={ta.searchPlaceholder}
-              className="min-h-11 w-full rounded-xl py-2 pl-10 pr-4 text-sm"
-              style={{
-                backgroundColor: 'var(--m3-surface-container-lowest)',
-                color: 'var(--m3-on-surface)',
-              }}
-            />
-          </div>
         </div>
 
         <p role="status" className="mb-4 text-sm font-medium" style={{ color: 'var(--m3-on-surface-variant)' }}>

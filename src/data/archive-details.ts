@@ -1,4 +1,4 @@
-// Extra context is kept separate from the short descriptions used by search.
+// Extra context is kept separate from the short descriptions shown on each card.
 export const archiveDetails: Record<string, { es: string; en: string }> = {
   CareerOS: {
     es: 'Conecté un backend en Python y SQLite con generación de CV en Typst y una aplicación Android. El entorno de desarrollo se define con Nix; las pruebas comprueban la transformación de datos antes de producir el PDF.',
